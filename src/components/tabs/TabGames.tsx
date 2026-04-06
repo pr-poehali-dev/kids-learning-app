@@ -1,6 +1,9 @@
 import { useState } from "react";
 import { StarRating } from "@/components/shared/MascotCharacter";
 import { PhraseBuilder } from "@/components/tabs/PhraseBuilder";
+import { GameMatchPairs } from "@/components/games/GameMatchPairs";
+import { GameBuildWord } from "@/components/games/GameBuildWord";
+import { GameWhatOnPicture } from "@/components/games/GameWhatOnPicture";
 
 const GAMES = [
   { id: 1, icon: "🎴", title: "Найди пару", desc: "Соедини одинаковые карточки", color: "#7C3AED", stars: 3 },
@@ -11,10 +14,42 @@ const GAMES = [
   { id: 6, icon: "🎙️", title: "Повтори звук", desc: "Тренируем произношение", color: "#06B6D4", stars: 0 },
 ];
 
+type ActiveGame = "matchpairs" | "buildword" | "whatonpicture" | "phrasebuilder" | null;
+
+const GAME_ID_MAP: Record<number, ActiveGame> = {
+  1: "matchpairs",
+  2: "buildword",
+  3: "whatonpicture",
+};
+
 export function TabGames() {
-  const [flipped, setFlipped] = useState<number | null>(null);
+  const [activeGame, setActiveGame] = useState<ActiveGame>(null);
   const [played, setPlayed] = useState<number[]>([1, 2, 3]);
   const [showBuilder, setShowBuilder] = useState(false);
+
+  const handlePlay = (gameId: number) => {
+    const game = GAME_ID_MAP[gameId];
+    if (game) {
+      setActiveGame(game);
+      setShowBuilder(false);
+    }
+  };
+
+  const handleBack = () => {
+    setActiveGame(null);
+  };
+
+  if (activeGame === "matchpairs") return <GameMatchPairs onBack={handleBack} />;
+  if (activeGame === "buildword") return <GameBuildWord onBack={handleBack} />;
+  if (activeGame === "whatonpicture") return <GameWhatOnPicture onBack={handleBack} />;
+  if (activeGame === "phrasebuilder") return (
+    <div className="space-y-3">
+      <button onClick={handleBack} className="flex items-center gap-2 text-gray-500 font-bold text-sm active:scale-95 transition-all">
+        ← Назад к играм
+      </button>
+      <PhraseBuilder />
+    </div>
+  );
 
   return (
     <div className="space-y-5">
@@ -24,7 +59,7 @@ export function TabGames() {
             <div className="text-white font-black text-xl">Игровая комната</div>
             <div className="text-purple-200 text-sm mt-1">6 игр доступно</div>
           </div>
-          <div className="tex-5xl anim-wiggle">🎮</div>
+          <div className="text-5xl anim-wiggle">🎮</div>
         </div>
         <div className="flex gap-2 mt-4">
           <div className="bg-white/20 rounded-2xl px-3 py-1 text-white text-xs font-bold">🧠 Память</div>
@@ -37,7 +72,7 @@ export function TabGames() {
       <div
         className="kid-card p-4 flex items-center gap-4 cursor-pointer"
         style={{ border: "2px solid #06B6D4" }}
-        onClick={() => setShowBuilder((v) => !v)}
+        onClick={() => setActiveGame("phrasebuilder")}
       >
         <div
           className="w-14 h-14 rounded-2xl flex items-center justify-center text-3xl flex-shrink-0"
@@ -49,26 +84,18 @@ export function TabGames() {
           <div className="font-black text-gray-800">Фразовый конструктор</div>
           <div className="text-xs text-gray-400">Логопедические карточки • Голос</div>
         </div>
-        <div className="text-cyan-500 text-xl transition-transform duration-200" style={{ transform: showBuilder ? "rotate(180deg)" : "none" }}>
-          ▼
-        </div>
+        <div className="text-cyan-500 font-bold text-lg">▶</div>
       </div>
-
-      {showBuilder && (
-        <div className="anim-slide-up">
-          <PhraseBuilder />
-        </div>
-      )}
 
       <div className="grid grid-cols-2 gap-3">
         {GAMES.map((game, idx) => {
           const isPlayed = played.includes(game.id);
+          const hasGame = !!GAME_ID_MAP[game.id];
           return (
             <div
               key={game.id}
               className="kid-card p-4 relative overflow-hidden"
               style={{ animationDelay: `${idx * 0.1}s` }}
-              onClick={() => setFlipped(flipped === game.id ? null : game.id)}
             >
               <div
                 className="absolute top-0 right-0 w-16 h-16 rounded-full opacity-10 -translate-y-4 translate-x-4"
@@ -77,15 +104,18 @@ export function TabGames() {
               <div className="text-3xl mb-2">{game.icon}</div>
               <div className="font-black text-gray-800 text-sm">{game.title}</div>
               <div className="text-xs text-gray-400 mt-0.5 mb-2">{game.desc}</div>
-              {isPlayed ? (
-                <StarRating stars={game.stars} />
-              ) : (
-                <div
-                  className="kid-btn text-xs py-1.5 px-3 inline-block mt-1"
+              {isPlayed && <StarRating stars={game.stars} />}
+              {hasGame && (
+                <button
+                  className="kid-btn text-xs py-1.5 px-3 mt-2 block"
                   style={{ background: game.color }}
+                  onClick={() => handlePlay(game.id)}
                 >
-                  Играть
-                </div>
+                  {isPlayed ? "Играть снова" : "Играть"}
+                </button>
+              )}
+              {!hasGame && !isPlayed && (
+                <div className="text-xs text-gray-400 mt-1 font-semibold">🔒 Скоро</div>
               )}
             </div>
           );
