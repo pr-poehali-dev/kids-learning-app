@@ -1,35 +1,105 @@
 import { useState } from "react";
 import { MascotCharacter } from "@/components/shared/MascotCharacter";
+import { type Profile } from "@/hooks/useProfile";
 
 const LESSONS = [
-  { id: 1, icon: "📖", title: "Буква А", subtitle: "Азбука", color: "#7C3AED", bgColor: "#EDE9FE", progress: 100, level: 1 },
-  { id: 2, icon: "📚", title: "Буква Б", subtitle: "Азбука", color: "#EC4899", bgColor: "#FCE7F3", progress: 75, level: 2 },
-  { id: 3, icon: "🗣️", title: "Звук «МА»", subtitle: "Речь", color: "#F97316", bgColor: "#FFEDD5", progress: 40, level: 3 },
-  { id: 4, icon: "✏️", title: "Пиши вместе", subtitle: "Письмо", color: "#3B82F6", bgColor: "#DBEAFE", progress: 0, level: 4 },
-  { id: 5, icon: "🎵", title: "Стихи и ритм", subtitle: "Речь", color: "#22C55E", bgColor: "#DCFCE7", progress: 0, level: 5 },
-  { id: 6, icon: "💬", title: "Первые слова", subtitle: "Слова", color: "#06B6D4", bgColor: "#CFFAFE", progress: 0, level: 6 },
+  { id: 1, icon: "📖", title: "Буква А", subtitle: "Азбука", color: "#7C3AED", bgColor: "#EDE9FE", progress: 100, level: 1,
+    content: ["Буква А — первая буква алфавита!", "А как в слове: А-рбуз 🍉, А-ист 🦢, А-пельсин 🍊", "Попробуй написать букву А в воздухе пальцем ✏️"] },
+  { id: 2, icon: "📚", title: "Буква Б", subtitle: "Азбука", color: "#EC4899", bgColor: "#FCE7F3", progress: 75, level: 2,
+    content: ["Буква Б — вторая буква алфавита!", "Б как в слове: Б-аран 🐏, Б-анан 🍌, Б-абочка 🦋", "Скажи громко: Б-Б-Б! 📣"] },
+  { id: 3, icon: "🗣️", title: "Звук «МА»", subtitle: "Речь", color: "#F97316", bgColor: "#FFEDD5", progress: 40, level: 3,
+    content: ["Слог МА — начало слова МАМА 👩", "Повтори: МА-МА, МА-ши-на, МА-ли-на 🍓", "Придумай своё слово со слогом МА!"] },
+  { id: 4, icon: "✏️", title: "Пиши вместе", subtitle: "Письмо", color: "#3B82F6", bgColor: "#DBEAFE", progress: 0, level: 4,
+    content: ["Учимся писать первые буквы!", "Обведи букву пальцем по экрану 👆", "Потом попробуй написать карандашом в тетради ✏️"] },
+  { id: 5, icon: "🎵", title: "Стихи и ритм", subtitle: "Речь", color: "#22C55E", bgColor: "#DCFCE7", progress: 0, level: 5,
+    content: ["Стихи помогают развить речь и память!", "Мишка косолапый по лесу идёт 🐻", "Повтори стихотворение вместе с мамой"] },
+  { id: 6, icon: "💬", title: "Первые слова", subtitle: "Слова", color: "#06B6D4", bgColor: "#CFFAFE", progress: 0, level: 6,
+    content: ["Учимся произносить первые слова!", "МА-МА 👩, ПА-ПА 👨, БА-БА 👵", "Повторяй за ЗнайКой медленно и чётко"] },
 ];
 
-export function TabLearn() {
+interface Props {
+  profile: Profile;
+}
+
+function LessonScreen({ lesson, onBack }: { lesson: typeof LESSONS[0]; onBack: () => void }) {
+  const [step, setStep] = useState(0);
+
+  const isLast = step === lesson.content.length - 1;
+
+  return (
+    <div className="space-y-4 anim-slide-up">
+      <div className="flex items-center gap-3">
+        <button onClick={onBack} className="w-9 h-9 rounded-2xl bg-gray-100 flex items-center justify-center text-gray-500 font-bold active:scale-95 transition-all">←</button>
+        <div>
+          <div className="font-black text-gray-800">{lesson.title}</div>
+          <div className="text-xs text-gray-400">{lesson.subtitle} · Шаг {step + 1} из {lesson.content.length}</div>
+        </div>
+      </div>
+
+      {/* Progress steps */}
+      <div className="flex gap-1.5">
+        {lesson.content.map((_, i) => (
+          <div key={i} className={`h-2 flex-1 rounded-full transition-all duration-500 ${i <= step ? "" : "bg-gray-200"}`}
+            style={i <= step ? { background: lesson.color } : {}} />
+        ))}
+      </div>
+
+      {/* Main card */}
+      <div
+        className="kid-card p-8 text-center min-h-48 flex flex-col items-center justify-center gap-4"
+        style={{ background: lesson.bgColor, border: `2px solid ${lesson.color}33` }}
+      >
+        <div className="text-6xl anim-bounce-slow">{lesson.icon}</div>
+        <div className="text-xl font-black text-gray-800 leading-relaxed">{lesson.content[step]}</div>
+      </div>
+
+      <div className="flex gap-3">
+        {step > 0 && (
+          <button
+            onClick={() => setStep(s => s - 1)}
+            className="flex-1 py-3 rounded-2xl bg-gray-100 text-gray-600 font-bold text-sm active:scale-95 transition-all"
+          >
+            ← Назад
+          </button>
+        )}
+        <button
+          onClick={() => isLast ? onBack() : setStep(s => s + 1)}
+          className="flex-1 kid-btn py-3"
+          style={{ background: isLast ? "#22C55E" : lesson.color }}
+        >
+          {isLast ? "✅ Готово!" : "Далее →"}
+        </button>
+      </div>
+    </div>
+  );
+}
+
+export function TabLearn({ profile }: Props) {
   const [selected, setSelected] = useState<number | null>(null);
+
+  const activeLesson = selected !== null ? LESSONS.find(l => l.id === selected) : null;
+
+  if (activeLesson) {
+    return <LessonScreen lesson={activeLesson} onBack={() => setSelected(null)} />;
+  }
 
   return (
     <div className="space-y-6">
       <div className="flex items-center gap-4">
         <MascotCharacter />
         <div>
-          <h2 className="text-2xl font-black text-purple-800">Привет, Маша! 👋</h2>
+          <h2 className="text-2xl font-black text-purple-800">Привет, {profile.name || "друг"}! 👋</h2>
           <p className="text-purple-500 font-semibold">Продолжай учиться!</p>
           <div className="flex items-center gap-2 mt-1">
-            <span className="text-orange-500 font-bold text-sm">🔥 3 дня подряд!</span>
-            <span className="bg-yellow-100 text-yellow-700 rounded-full px-2 py-0.5 text-xs font-bold">⭐ 47 звёзд</span>
+            <span className="text-orange-500 font-bold text-sm">🔥 {profile.streak} дней подряд!</span>
+            <span className="bg-yellow-100 text-yellow-700 rounded-full px-2 py-0.5 text-xs font-bold">⭐ {profile.stars} звёзд</span>
           </div>
         </div>
       </div>
 
       <div>
         <div className="flex items-center justify-between mb-1">
-          <span className="text-sm font-bold text-purple-600">Уровень 3 из 6</span>
+          <span className="text-sm font-bold text-purple-600">Уровень {profile.level} из 6</span>
           <span className="text-xs text-gray-400">75%</span>
         </div>
         <div className="progress-bar-wrap">
@@ -45,7 +115,7 @@ export function TabLearn() {
             return (
               <div
                 key={lesson.id}
-                className={`kid-card p-4 ${isLocked ? "opacity-50" : ""}`}
+                className={`kid-card p-4 ${isLocked ? "opacity-50 cursor-not-allowed" : "cursor-pointer"}`}
                 style={{ animationDelay: `${idx * 0.08}s` }}
                 onClick={() => !isLocked && setSelected(lesson.id)}
               >
@@ -70,6 +140,16 @@ export function TabLearn() {
                 {lesson.progress === 100 && (
                   <div className="flex items-center gap-1 mt-1">
                     <span className="text-green-500 text-xs font-bold">✅ Готово!</span>
+                  </div>
+                )}
+                {!isLocked && lesson.progress < 100 && (
+                  <div className="mt-2">
+                    <div
+                      className="text-xs font-bold px-3 py-1 rounded-xl text-white inline-block"
+                      style={{ background: lesson.color }}
+                    >
+                      Начать →
+                    </div>
                   </div>
                 )}
               </div>
