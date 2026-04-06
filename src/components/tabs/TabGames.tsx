@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { StarRating } from "@/components/shared/MascotCharacter";
+import { PhraseBuilder } from "@/components/tabs/PhraseBuilder";
 
 const GAMES = [
   { id: 1, icon: "🎴", title: "Найди пару", desc: "Соедини одинаковые карточки", color: "#7C3AED", stars: 3 },
@@ -13,6 +14,7 @@ const GAMES = [
 export function TabGames() {
   const [flipped, setFlipped] = useState<number | null>(null);
   const [played, setPlayed] = useState<number[]>([1, 2, 3]);
+  const [showBuilder, setShowBuilder] = useState(false);
 
   return (
     <div className="space-y-5">
@@ -30,6 +32,33 @@ export function TabGames() {
           <div className="bg-white/20 rounded-2xl px-3 py-1 text-white text-xs font-bold">🔤 Буквы</div>
         </div>
       </div>
+
+      {/* Phrase Builder entry */}
+      <div
+        className="kid-card p-4 flex items-center gap-4 cursor-pointer"
+        style={{ border: "2px solid #06B6D4" }}
+        onClick={() => setShowBuilder((v) => !v)}
+      >
+        <div
+          className="w-14 h-14 rounded-2xl flex items-center justify-center text-3xl flex-shrink-0"
+          style={{ background: "#CFFAFE" }}
+        >
+          🗣️
+        </div>
+        <div className="flex-1">
+          <div className="font-black text-gray-800">Фразовый конструктор</div>
+          <div className="text-xs text-gray-400">Логопедические карточки • Голос</div>
+        </div>
+        <div className="text-cyan-500 text-xl transition-transform duration-200" style={{ transform: showBuilder ? "rotate(180deg)" : "none" }}>
+          ▼
+        </div>
+      </div>
+
+      {showBuilder && (
+        <div className="anim-slide-up">
+          <PhraseBuilder />
+        </div>
+      )}
 
       <div className="grid grid-cols-2 gap-3">
         {GAMES.map((game, idx) => {
