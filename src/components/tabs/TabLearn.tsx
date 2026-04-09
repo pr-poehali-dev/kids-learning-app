@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { MascotCharacter } from "@/components/shared/MascotCharacter";
 import { type Profile } from "@/hooks/useProfile";
+import { type XPState } from "@/hooks/useXP";
 
 const LESSONS = [
   { id: 1, icon: "📖", title: "Буква А", subtitle: "Азбука", color: "#7C3AED", bgColor: "#EDE9FE", progress: 100, level: 1,
@@ -19,9 +20,11 @@ const LESSONS = [
 
 interface Props {
   profile: Profile;
+  xpState: XPState;
+  addXP: (amount: number, ctx?: { lesson?: boolean }) => void;
 }
 
-function LessonScreen({ lesson, onBack }: { lesson: typeof LESSONS[0]; onBack: () => void }) {
+function LessonScreen({ lesson, onBack, onDone }: { lesson: typeof LESSONS[0]; onBack: () => void; onDone: () => void }) {
   const [step, setStep] = useState(0);
 
   const isLast = step === lesson.content.length - 1;
@@ -63,7 +66,7 @@ function LessonScreen({ lesson, onBack }: { lesson: typeof LESSONS[0]; onBack: (
           </button>
         )}
         <button
-          onClick={() => isLast ? onBack() : setStep(s => s + 1)}
+          onClick={() => isLast ? onDone() : setStep(s => s + 1)}
           className="flex-1 kid-btn py-3"
           style={{ background: isLast ? "#22C55E" : lesson.color }}
         >
@@ -74,13 +77,20 @@ function LessonScreen({ lesson, onBack }: { lesson: typeof LESSONS[0]; onBack: (
   );
 }
 
-export function TabLearn({ profile }: Props) {
+
+
+export function TabLearn({ profile, addXP }: Props) {
   const [selected, setSelected] = useState<number | null>(null);
 
   const activeLesson = selected !== null ? LESSONS.find(l => l.id === selected) : null;
 
+  const handleLessonDone = () => {
+    addXP(15, { lesson: true });
+    setSelected(null);
+  };
+
   if (activeLesson) {
-    return <LessonScreen lesson={activeLesson} onBack={() => setSelected(null)} />;
+    return <LessonScreen lesson={activeLesson} onBack={() => setSelected(null)} onDone={handleLessonDone} />;
   }
 
   return (
@@ -158,23 +168,6 @@ export function TabLearn({ profile }: Props) {
         </div>
       </div>
 
-      <div>
-        <h3 className="text-lg font-black text-gray-800 mb-3">Путь героя</h3>
-        <div className="kid-card p-5">
-          <div className="flex items-center justify-between">
-            {LESSONS.map((l, i) => (
-              <div key={l.id} className="flex items-center">
-                <div className={`level-dot ${l.progress === 100 ? "done" : l.progress > 0 ? "current" : "locked"}`}>
-                  {l.progress === 100 ? "✓" : l.level}
-                </div>
-                {i < LESSONS.length - 1 && (
-                  <div className={`h-1 w-6 mx-1 rounded-full ${l.progress === 100 ? "bg-green-400" : "bg-gray-200"}`} />
-                )}
-              </div>
-            ))}
-          </div>
-        </div>
-      </div>
     </div>
   );
 }

@@ -1,43 +1,41 @@
 import { useState } from "react";
-
-const PUZZLES = [
-  { word: "МАМА", emoji: "👩", clue: "Самый близкий человек" },
-  { word: "ПАПА", emoji: "👨", clue: "Глава семьи" },
-  { word: "ЛУНА", emoji: "🌙", clue: "Светит ночью" },
-  { word: "РЕКА", emoji: "🏞️", clue: "Течёт между берегов" },
-  { word: "ГРИБ", emoji: "🍄", clue: "Растёт в лесу" },
-];
+import { getRandomPuzzles } from "@/data/gameData";
 
 interface Props { onBack: () => void; }
 
 export function GamePuzzleWord({ onBack }: Props) {
+  const [puzzles] = useState(() => getRandomPuzzles(6));
   const [puzzleIdx, setPuzzleIdx] = useState(0);
   const [input, setInput] = useState("");
   const [status, setStatus] = useState<"idle" | "correct" | "wrong">("idle");
   const [score, setScore] = useState(0);
   const [finished, setFinished] = useState(false);
   const [showHint, setShowHint] = useState(false);
+  const [attempts, setAttempts] = useState(0);
 
-  const puzzle = PUZZLES[puzzleIdx];
+  const puzzle = puzzles[puzzleIdx];
   const masked = puzzle.word.split("").map((ch, i) => (i === 0 || i === puzzle.word.length - 1 ? ch : "_")).join(" ");
 
   const check = () => {
     const ans = input.trim().toUpperCase();
     if (ans === puzzle.word) {
+      const pts = Math.max(1, 3 - attempts);
+      setScore(s => s + pts);
       setStatus("correct");
-      setScore(s => s + 1);
     } else {
+      setAttempts(a => a + 1);
       setStatus("wrong");
       setTimeout(() => { setStatus("idle"); setInput(""); }, 1000);
     }
   };
 
   const next = () => {
-    if (puzzleIdx + 1 >= PUZZLES.length) { setFinished(true); return; }
+    if (puzzleIdx + 1 >= puzzles.length) { setFinished(true); return; }
     setPuzzleIdx(i => i + 1);
     setInput("");
     setStatus("idle");
     setShowHint(false);
+    setAttempts(0);
   };
 
   if (finished) return (
@@ -49,8 +47,11 @@ export function GamePuzzleWord({ onBack }: Props) {
       <div className="kid-card p-8 text-center anim-pop-in" style={{ background: "linear-gradient(135deg, #22C55E, #16A34A)" }}>
         <div className="text-6xl mb-3">🧩</div>
         <div className="text-white font-black text-2xl">Все слова найдены!</div>
-        <div className="text-green-100 text-lg mt-2">{score} из {PUZZLES.length} с первой попытки</div>
-        <button onClick={onBack} className="mt-4 kid-btn py-2 px-6" style={{ background: "white", color: "#16A34A" }}>Назад</button>
+        <div className="text-green-100 text-lg mt-2">Очки: {score} / {puzzles.length * 3}</div>
+        <div className="flex gap-3 mt-4 justify-center">
+          <button onClick={() => { setPuzzleIdx(0); setInput(""); setStatus("idle"); setScore(0); setFinished(false); setAttempts(0); }} className="kid-btn py-2 px-5" style={{ background: "white", color: "#16A34A" }}>Ещё раз!</button>
+          <button onClick={onBack} className="py-2 px-4 rounded-2xl bg-white/20 text-white font-bold text-sm">Назад</button>
+        </div>
       </div>
     </div>
   );
@@ -61,12 +62,16 @@ export function GamePuzzleWord({ onBack }: Props) {
         <button onClick={onBack} className="w-9 h-9 rounded-2xl bg-gray-100 flex items-center justify-center text-gray-500 font-bold active:scale-95">←</button>
         <div>
           <div className="font-black text-gray-800">Пазл-слово</div>
-          <div className="text-xs text-gray-400">Слово {puzzleIdx + 1} из {PUZZLES.length} · ⭐ {score}</div>
+          <div className="text-xs text-gray-400">Слово {puzzleIdx + 1} из {puzzles.length} · ⭐ {score}</div>
         </div>
       </div>
 
+      <div className="h-2 bg-gray-100 rounded-full overflow-hidden">
+        <div className="h-full rounded-full transition-all duration-500" style={{ width: `${(puzzleIdx / puzzles.length) * 100}%`, background: "linear-gradient(90deg,#22C55E,#16A34A)" }} />
+      </div>
+
       <div className="kid-card p-6 text-center">
-        <div className="text-7xl mb-3">{puzzle.emoji}</div>
+        <div className="text-7xl mb-3 anim-bounce-slow">{puzzle.emoji}</div>
         <div className="text-3xl font-black text-purple-700 tracking-widest mb-2">{masked}</div>
         <div className="text-sm text-gray-400 font-semibold">{puzzle.word.length} букв</div>
       </div>
@@ -82,7 +87,7 @@ export function GamePuzzleWord({ onBack }: Props) {
           <div className="text-3xl mb-1">🎉</div>
           <div className="text-white font-black">Правильно! Слово: {puzzle.word}</div>
           <button onClick={next} className="mt-3 kid-btn py-2 px-5 text-sm" style={{ background: "white", color: "#16A34A" }}>
-            {puzzleIdx + 1 >= PUZZLES.length ? "Завершить 🏁" : "Следующее →"}
+            {puzzleIdx + 1 >= puzzles.length ? "Завершить 🏁" : "Следующее →"}
           </button>
         </div>
       ) : (
@@ -101,19 +106,11 @@ export function GamePuzzleWord({ onBack }: Props) {
               <div className="text-red-500 text-sm font-bold text-center mt-2">Не то! Попробуй ещё 💪</div>
             )}
           </div>
-
           <div className="flex gap-3">
-            <button
-              onClick={() => setShowHint(true)}
-              className="flex-1 py-3 rounded-2xl bg-yellow-100 text-yellow-700 font-bold text-sm active:scale-95 transition-all"
-            >
+            <button onClick={() => setShowHint(true)} className="flex-1 py-3 rounded-2xl bg-yellow-100 text-yellow-700 font-bold text-sm active:scale-95 transition-all">
               💡 Подсказка
             </button>
-            <button
-              onClick={check}
-              className="flex-1 kid-btn py-3"
-              style={{ background: "linear-gradient(135deg, #7C3AED, #EC4899)" }}
-            >
+            <button onClick={check} className="flex-1 kid-btn py-3" style={{ background: "linear-gradient(135deg, #7C3AED, #EC4899)" }}>
               Проверить ✓
             </button>
           </div>

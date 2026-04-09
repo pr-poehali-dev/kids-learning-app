@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { StarRating } from "@/components/shared/MascotCharacter";
+import { type XPState } from "@/hooks/useXP";
 import { PhraseBuilder } from "@/components/tabs/PhraseBuilder";
 import { GameMatchPairs } from "@/components/games/GameMatchPairs";
 import { GameBuildWord } from "@/components/games/GameBuildWord";
@@ -28,7 +29,12 @@ const GAME_ID_MAP: Record<number, ActiveGame> = {
   6: "repeatsound",
 };
 
-export function TabGames() {
+interface Props {
+  xpState: XPState;
+  addXP: (amount: number, ctx?: { game?: boolean }) => void;
+}
+
+export function TabGames({ addXP }: Props) {
   const [activeGame, setActiveGame] = useState<ActiveGame>(null);
   const [played] = useState<number[]>([1, 2, 3]);
 
@@ -37,7 +43,10 @@ export function TabGames() {
     if (game) setActiveGame(game);
   };
 
-  const handleBack = () => setActiveGame(null);
+  const handleBack = () => {
+    addXP(10, { game: true });
+    setActiveGame(null);
+  };
 
   if (activeGame === "matchpairs") return <GameMatchPairs onBack={handleBack} />;
   if (activeGame === "buildword") return <GameBuildWord onBack={handleBack} />;

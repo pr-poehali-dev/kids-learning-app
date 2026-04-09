@@ -1,27 +1,16 @@
 import { useState } from "react";
-
-const QUESTIONS = [
-  { emoji: "🐱", answer: "КОТ", options: ["КОТ", "СОБАКА", "ПТИЦА", "РЫБА"] },
-  { emoji: "🌳", answer: "ДЕРЕВО", options: ["ЦВЕТОК", "ДЕРЕВО", "ГРИБ", "ТРАВА"] },
-  { emoji: "🚗", answer: "МАШИНА", options: ["САМОЛЁТ", "КОРАБЛЬ", "МАШИНА", "ПОЕЗД"] },
-  { emoji: "🍎", answer: "ЯБЛОКО", options: ["ГРУША", "БАНАН", "ЯБЛОКО", "АПЕЛЬСИН"] },
-  { emoji: "🏠", answer: "ДОМ", options: ["ДОМ", "ШКОЛА", "МАГАЗИН", "БОЛЬНИЦА"] },
-];
-
-function shuffle<T>(arr: T[]): T[] {
-  return [...arr].sort(() => Math.random() - 0.5);
-}
+import { getRandomPictureQuestions } from "@/data/gameData";
 
 interface Props { onBack: () => void; }
 
 export function GameWhatOnPicture({ onBack }: Props) {
+  const [questions] = useState(() => getRandomPictureQuestions(8));
   const [idx, setIdx] = useState(0);
   const [picked, setPicked] = useState<string | null>(null);
   const [score, setScore] = useState(0);
   const [finished, setFinished] = useState(false);
-  const [options] = useState(() => QUESTIONS.map((q) => shuffle(q.options)));
 
-  const q = QUESTIONS[idx];
+  const q = questions[idx];
   const isCorrect = picked === q.answer;
 
   const pick = (opt: string) => {
@@ -31,7 +20,7 @@ export function GameWhatOnPicture({ onBack }: Props) {
   };
 
   const next = () => {
-    if (idx + 1 >= QUESTIONS.length) {
+    if (idx + 1 >= questions.length) {
       setFinished(true);
     } else {
       setIdx((i) => i + 1);
@@ -40,6 +29,7 @@ export function GameWhatOnPicture({ onBack }: Props) {
   };
 
   if (finished) {
+    const pct = Math.round((score / questions.length) * 100);
     return (
       <div className="space-y-4 anim-slide-up">
         <div className="flex items-center gap-3">
@@ -47,11 +37,16 @@ export function GameWhatOnPicture({ onBack }: Props) {
           <div className="font-black text-gray-800">Что на картинке?</div>
         </div>
         <div className="kid-card p-8 text-center anim-pop-in" style={{ background: "linear-gradient(135deg, #7C3AED, #EC4899)" }}>
-          <div className="text-6xl mb-3">🏆</div>
-          <div className="text-white font-black text-2xl">Игра окончена!</div>
-          <div className="text-purple-200 text-lg mt-2">{score} из {QUESTIONS.length} правильно</div>
+          <div className="text-6xl mb-3">{pct >= 80 ? "🏆" : pct >= 50 ? "🌟" : "💪"}</div>
+          <div className="text-white font-black text-2xl">
+            {pct >= 80 ? "Отлично!" : pct >= 50 ? "Хорошо!" : "Тренируйся!"}
+          </div>
+          <div className="text-purple-200 text-lg mt-2">{score} из {questions.length} правильно ({pct}%)</div>
           <div className="flex gap-2 mt-4 justify-center">
-            <button onClick={onBack} className="kid-btn py-2 px-5 text-sm" style={{ background: "white", color: "#7C3AED" }}>
+            <button onClick={() => { setIdx(0); setPicked(null); setScore(0); setFinished(false); }} className="kid-btn py-2 px-4 text-sm" style={{ background: "white", color: "#7C3AED" }}>
+              Новая игра
+            </button>
+            <button onClick={onBack} className="py-2 px-4 rounded-2xl bg-white/20 text-white font-bold text-sm">
               Назад
             </button>
           </div>
@@ -66,8 +61,16 @@ export function GameWhatOnPicture({ onBack }: Props) {
         <button onClick={onBack} className="w-9 h-9 rounded-2xl bg-gray-100 flex items-center justify-center text-gray-500 font-bold active:scale-95 transition-all">←</button>
         <div>
           <div className="font-black text-gray-800">Что на картинке?</div>
-          <div className="text-xs text-gray-400">Вопрос {idx + 1} из {QUESTIONS.length} • ⭐ {score}</div>
+          <div className="text-xs text-gray-400">Вопрос {idx + 1} из {questions.length}</div>
         </div>
+        <div className="ml-auto">
+          <span className="text-xs bg-yellow-100 text-yellow-700 rounded-xl px-2 py-1 font-black">⭐ {score}</span>
+        </div>
+      </div>
+
+      {/* Progress */}
+      <div className="h-2 bg-gray-100 rounded-full overflow-hidden">
+        <div className="h-full rounded-full transition-all duration-500" style={{ width: `${((idx) / questions.length) * 100}%`, background: "linear-gradient(90deg,#7C3AED,#EC4899)" }} />
       </div>
 
       <div className="kid-card p-8 text-center">
@@ -75,7 +78,7 @@ export function GameWhatOnPicture({ onBack }: Props) {
       </div>
 
       <div className="grid grid-cols-2 gap-3">
-        {options[idx].map((opt) => {
+        {q.options.map((opt) => {
           const isThis = opt === q.answer;
           const isPicked = opt === picked;
           return (
@@ -109,7 +112,7 @@ export function GameWhatOnPicture({ onBack }: Props) {
             className="w-full kid-btn py-3"
             style={{ background: isCorrect ? "#22C55E" : "#7C3AED" }}
           >
-            {idx + 1 >= QUESTIONS.length ? "Завершить 🏁" : "Следующий →"}
+            {idx + 1 >= questions.length ? "Завершить 🏁" : "Следующий →"}
           </button>
         </div>
       )}

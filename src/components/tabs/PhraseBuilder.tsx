@@ -62,11 +62,33 @@ const SLOT_ORDINALS = ["первое", "второе", "третье", "четв
 function speak(text: string) {
   if (!("speechSynthesis" in window)) return;
   window.speechSynthesis.cancel();
-  const utt = new SpeechSynthesisUtterance(text);
-  utt.lang = "ru-RU";
-  utt.rate = 0.85;
-  utt.pitch = 1.2;
-  window.speechSynthesis.speak(utt);
+
+  const doSpeak = () => {
+    const utt = new SpeechSynthesisUtterance(text);
+    utt.lang = "ru-RU";
+    utt.rate = 0.65;
+    utt.pitch = 1.6;
+    utt.volume = 1;
+
+    const voices = window.speechSynthesis.getVoices();
+    const ruVoice = voices.find(v =>
+      v.lang.startsWith("ru") && (
+        v.name.toLowerCase().includes("female") ||
+        v.name.toLowerCase().includes("alena") ||
+        v.name.toLowerCase().includes("katya") ||
+        v.name.toLowerCase().includes("irina")
+      )
+    ) || voices.find(v => v.lang.startsWith("ru")) || null;
+    if (ruVoice) utt.voice = ruVoice;
+
+    window.speechSynthesis.speak(utt);
+  };
+
+  if (window.speechSynthesis.getVoices().length === 0) {
+    window.speechSynthesis.addEventListener("voiceschanged", doSpeak, { once: true });
+  } else {
+    doSpeak();
+  }
 }
 
 export function PhraseBuilder() {

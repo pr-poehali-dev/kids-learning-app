@@ -1,10 +1,9 @@
-export type Tab = "learn" | "games" | "achievements" | "parents";
+export type Tab = "learn" | "games" | "achievements";
 
 const TABS: { id: Tab; icon: string; label: string }[] = [
   { id: "learn", icon: "📖", label: "Учёба" },
   { id: "games", icon: "🎮", label: "Игры" },
   { id: "achievements", icon: "🏆", label: "Трофеи" },
-  { id: "parents", icon: "👨‍👩‍👧", label: "Родители" },
 ];
 
 interface AppNavProps {

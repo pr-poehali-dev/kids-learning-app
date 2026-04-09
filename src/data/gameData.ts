@@ -1,0 +1,341 @@
+// ======= MATCH PAIRS (100+ пар) =======
+export const ALL_PAIRS = [
+  // Животные
+  { id: 1,   emoji: "🐱", label: "КОТ",        category: "animals" },
+  { id: 2,   emoji: "🐶", label: "СОБАКА",      category: "animals" },
+  { id: 3,   emoji: "🐦", label: "ПТИЦА",       category: "animals" },
+  { id: 4,   emoji: "🐠", label: "РЫБА",        category: "animals" },
+  { id: 5,   emoji: "🐻", label: "МЕДВЕДЬ",     category: "animals" },
+  { id: 6,   emoji: "🦁", label: "ЛЕВ",         category: "animals" },
+  { id: 7,   emoji: "🐯", label: "ТИГР",        category: "animals" },
+  { id: 8,   emoji: "🐘", label: "СЛОН",        category: "animals" },
+  { id: 9,   emoji: "🦊", label: "ЛИСА",        category: "animals" },
+  { id: 10,  emoji: "🐺", label: "ВОЛК",        category: "animals" },
+  { id: 11,  emoji: "🐸", label: "ЛЯГУШКА",     category: "animals" },
+  { id: 12,  emoji: "🐼", label: "ПАНДА",       category: "animals" },
+  { id: 13,  emoji: "🦋", label: "БАБОЧКА",     category: "animals" },
+  { id: 14,  emoji: "🐝", label: "ПЧЕЛА",       category: "animals" },
+  { id: 15,  emoji: "🐢", label: "ЧЕРЕПАХА",    category: "animals" },
+  { id: 16,  emoji: "🦀", label: "КРАБ",        category: "animals" },
+  { id: 17,  emoji: "🐬", label: "ДЕЛЬФИН",     category: "animals" },
+  { id: 18,  emoji: "🦒", label: "ЖИРАФ",       category: "animals" },
+  { id: 19,  emoji: "🐧", label: "ПИНГВИН",     category: "animals" },
+  { id: 20,  emoji: "🦜", label: "ПОПУГАЙ",     category: "animals" },
+  // Еда
+  { id: 21,  emoji: "🍎", label: "ЯБЛОКО",      category: "food" },
+  { id: 22,  emoji: "🍌", label: "БАНАН",        category: "food" },
+  { id: 23,  emoji: "🍊", label: "АПЕЛЬСИН",    category: "food" },
+  { id: 24,  emoji: "🍇", label: "ВИНОГРАД",    category: "food" },
+  { id: 25,  emoji: "🍓", label: "КЛУБНИКА",    category: "food" },
+  { id: 26,  emoji: "🍉", label: "АРБУЗ",       category: "food" },
+  { id: 27,  emoji: "🍋", label: "ЛИМОН",       category: "food" },
+  { id: 28,  emoji: "🍑", label: "ПЕРСИК",      category: "food" },
+  { id: 29,  emoji: "🍒", label: "ВИШНЯ",       category: "food" },
+  { id: 30,  emoji: "🥝", label: "КИВИ",        category: "food" },
+  { id: 31,  emoji: "🥕", label: "МОРКОВЬ",     category: "food" },
+  { id: 32,  emoji: "🥦", label: "БРОККОЛИ",    category: "food" },
+  { id: 33,  emoji: "🌽", label: "КУКУРУЗА",    category: "food" },
+  { id: 34,  emoji: "🍄", label: "ГРИБ",        category: "food" },
+  { id: 35,  emoji: "🧅", label: "ЛУК",         category: "food" },
+  // Транспорт
+  { id: 36,  emoji: "🚗", label: "МАШИНА",      category: "transport" },
+  { id: 37,  emoji: "✈️", label: "САМОЛЁТ",     category: "transport" },
+  { id: 38,  emoji: "🚂", label: "ПОЕЗД",       category: "transport" },
+  { id: 39,  emoji: "🚢", label: "КОРАБЛЬ",     category: "transport" },
+  { id: 40,  emoji: "🚁", label: "ВЕРТОЛЁТ",    category: "transport" },
+  { id: 41,  emoji: "🚲", label: "ВЕЛОСИПЕД",   category: "transport" },
+  { id: 42,  emoji: "🛸", label: "РАКЕТА",      category: "transport" },
+  { id: 43,  emoji: "🚌", label: "АВТОБУС",     category: "transport" },
+  { id: 44,  emoji: "⛵", label: "ЛОДКА",       category: "transport" },
+  { id: 45,  emoji: "🏍️", label: "МОТОЦИКЛ",   category: "transport" },
+  // Природа
+  { id: 46,  emoji: "🌳", label: "ДЕРЕВО",      category: "nature" },
+  { id: 47,  emoji: "🌻", label: "ПОДСОЛНУХ",   category: "nature" },
+  { id: 48,  emoji: "🌹", label: "РОЗА",        category: "nature" },
+  { id: 49,  emoji: "🍁", label: "ЛИСТ",        category: "nature" },
+  { id: 50,  emoji: "🌊", label: "ВОЛНА",       category: "nature" },
+  { id: 51,  emoji: "⛰️", label: "ГОРА",        category: "nature" },
+  { id: 52,  emoji: "🌈", label: "РАДУГА",      category: "nature" },
+  { id: 53,  emoji: "☀️", label: "СОЛНЦЕ",      category: "nature" },
+  { id: 54,  emoji: "🌙", label: "ЛУНА",        category: "nature" },
+  { id: 55,  emoji: "⭐", label: "ЗВЕЗДА",      category: "nature" },
+  // Дом и быт
+  { id: 56,  emoji: "🏠", label: "ДОМ",         category: "home" },
+  { id: 57,  emoji: "🛋️", label: "ДИВАН",       category: "home" },
+  { id: 58,  emoji: "🪑", label: "СТУЛ",        category: "home" },
+  { id: 59,  emoji: "🛏️", label: "КРОВАТЬ",     category: "home" },
+  { id: 60,  emoji: "🪟", label: "ОКНО",        category: "home" },
+  { id: 61,  emoji: "🚪", label: "ДВЕРЬ",       category: "home" },
+  { id: 62,  emoji: "💡", label: "ЛАМПА",       category: "home" },
+  { id: 63,  emoji: "📚", label: "КНИГА",       category: "home" },
+  { id: 64,  emoji: "⌚", label: "ЧАСЫ",        category: "home" },
+  { id: 65,  emoji: "🖊️", label: "РУЧКА",       category: "home" },
+  // Игрушки и спорт
+  { id: 66,  emoji: "⚽", label: "МЯЧ",         category: "sport" },
+  { id: 67,  emoji: "🎈", label: "ШАР",         category: "sport" },
+  { id: 68,  emoji: "🪀", label: "ЙО-ЙО",       category: "sport" },
+  { id: 69,  emoji: "🧸", label: "МИШКА",       category: "sport" },
+  { id: 70,  emoji: "🎠", label: "КАРУСЕЛЬ",    category: "sport" },
+  { id: 71,  emoji: "🏊", label: "ПЛАВАНИЕ",    category: "sport" },
+  { id: 72,  emoji: "🎿", label: "ЛЫЖИ",        category: "sport" },
+  { id: 73,  emoji: "🎯", label: "МИШЕНЬ",      category: "sport" },
+];
+
+export function getRandomPairs(count: number = 4) {
+  const shuffled = [...ALL_PAIRS].sort(() => Math.random() - 0.5);
+  return shuffled.slice(0, count);
+}
+
+// ======= BUILD WORD (100+ слов) =======
+export const ALL_WORDS = [
+  // 3 буквы
+  { word: "КОТ",   emoji: "🐱", hint: "Мурлычет и любит рыбу" },
+  { word: "ДОМ",   emoji: "🏠", hint: "Где живёт семья" },
+  { word: "МАК",   emoji: "🌺", hint: "Красный цветок" },
+  { word: "СОН",   emoji: "😴", hint: "Когда ты спишь" },
+  { word: "МЯЧ",   emoji: "⚽", hint: "Им играют в футбол" },
+  { word: "РАК",   emoji: "🦞", hint: "Живёт в реке" },
+  { word: "ЛЕВ",   emoji: "🦁", hint: "Царь зверей" },
+  { word: "ЛУК",   emoji: "🧅", hint: "Растёт в огороде, острый" },
+  { word: "СУП",   emoji: "🍲", hint: "Горячее блюдо в тарелке" },
+  { word: "ЧАЙ",   emoji: "🍵", hint: "Горячий напиток" },
+  { word: "ЖУК",   emoji: "🪲", hint: "Летает и жужжит" },
+  { word: "РОТ",   emoji: "👄", hint: "Им говорим и едим" },
+  { word: "НОС",   emoji: "👃", hint: "На нём нюхают" },
+  { word: "ГОЛ",   emoji: "⚽", hint: "Мяч в воротах" },
+  { word: "ВОЛ",   emoji: "🐂", hint: "Сильное животное" },
+  { word: "ДУБ",   emoji: "🌳", hint: "Большое дерево с желудями" },
+  { word: "КИТ",   emoji: "🐋", hint: "Самое большое животное в море" },
+  { word: "БЫК",   emoji: "🐃", hint: "Рогатое животное" },
+  { word: "ЕЖ",    emoji: "🦔", hint: "Колючий зверь" },
+  { word: "ЛОБ",   emoji: "😊", hint: "Верхняя часть лица" },
+  // 4 буквы
+  { word: "ВОЛК",  emoji: "🐺", hint: "Серый хищник из леса" },
+  { word: "ЛИСА",  emoji: "🦊", hint: "Рыжая хитрая зверюшка" },
+  { word: "УТКА",  emoji: "🦆", hint: "Плавает в пруду и крякает" },
+  { word: "РОЗА",  emoji: "🌹", hint: "Красивый цветок с шипами" },
+  { word: "КОЗА",  emoji: "🐐", hint: "Даёт молоко и любит траву" },
+  { word: "ЛУНА",  emoji: "🌙", hint: "Светит ночью" },
+  { word: "РЫБА",  emoji: "🐟", hint: "Живёт в воде" },
+  { word: "ЖАБА",  emoji: "🐸", hint: "Прыгает и квакает" },
+  { word: "МАМА",  emoji: "👩", hint: "Самый родной человек" },
+  { word: "ПАПА",  emoji: "👨", hint: "Глава семьи" },
+  { word: "ЗИМА",  emoji: "❄️", hint: "Холодное время года" },
+  { word: "ЛЕТО",  emoji: "☀️", hint: "Жаркое время года" },
+  { word: "ГРИБ",  emoji: "🍄", hint: "Растёт в лесу" },
+  { word: "ТОРТ",  emoji: "🎂", hint: "Вкусное на день рождения" },
+  { word: "КНИГА", emoji: "📚", hint: "В ней буквы и истории" },
+  { word: "СЛОН",  emoji: "🐘", hint: "Самое большое животное суши" },
+  { word: "УТРО",  emoji: "🌅", hint: "Начало дня" },
+  { word: "НОГА",  emoji: "🦵", hint: "Ею ходим и бегаем" },
+  { word: "РУКА",  emoji: "🤚", hint: "Ею держим и рисуем" },
+  { word: "ГЛАЗ",  emoji: "👁️", hint: "Им видим мир" },
+  // 5 букв
+  { word: "КОШКА", emoji: "🐱", hint: "Пушистый домашний питомец" },
+  { word: "БЕЛКА", emoji: "🐿️", hint: "Рыжий зверёк на дереве с орешками" },
+  { word: "МЫШКА", emoji: "🐭", hint: "Маленький серый грызун" },
+  { word: "ЗАЙКА", emoji: "🐇", hint: "Белый пушистый прыгун" },
+  { word: "ПЧЕЛА", emoji: "🐝", hint: "Делает мёд и жалит" },
+  { word: "СВИНКА", emoji: "🐷", hint: "Хрюкает и живёт в хлеву" },
+  { word: "ЗВЕЗДА", emoji: "⭐", hint: "Светит на небе ночью" },
+  { word: "ОБЛАКО", emoji: "☁️", hint: "Плывёт по небу" },
+  { word: "ШКОЛА", emoji: "🏫", hint: "Место, где учатся дети" },
+  { word: "ВОЛНА", emoji: "🌊", hint: "В море бывает большая" },
+];
+
+export function getRandomWords(count: number = 5) {
+  const shuffled = [...ALL_WORDS].sort(() => Math.random() - 0.5);
+  return shuffled.slice(0, count);
+}
+
+// ======= WHAT ON PICTURE (150+ вопросов) =======
+export const ALL_PICTURE_QUESTIONS = [
+  // Животные
+  { emoji: "🐱", answer: "КОТ",       options: ["КОТ", "СОБАКА", "ПТИЦА", "РЫБА"] },
+  { emoji: "🐶", answer: "СОБАКА",    options: ["КОТ", "СОБАКА", "ВОЛК", "ЛИСА"] },
+  { emoji: "🦁", answer: "ЛЕВ",       options: ["ТИГР", "ЛЕВ", "ПАНТЕРА", "ГЕПАРД"] },
+  { emoji: "🐯", answer: "ТИГР",      options: ["ЛЕВ", "ТИГР", "ВОЛК", "МЕДВЕДЬ"] },
+  { emoji: "🐻", answer: "МЕДВЕДЬ",   options: ["МЕДВЕДЬ", "СОБАКА", "ВОЛК", "ЛИСА"] },
+  { emoji: "🦊", answer: "ЛИСА",      options: ["КОШКА", "ЛИСА", "СОБАКА", "ВОЛК"] },
+  { emoji: "🐺", answer: "ВОЛК",      options: ["СОБАКА", "ЛИСА", "ВОЛК", "МЕДВЕДЬ"] },
+  { emoji: "🐸", answer: "ЛЯГУШКА",   options: ["ЖАБА", "ЛЯГУШКА", "ЯЩЕРИЦА", "ЧЕРЕПАХА"] },
+  { emoji: "🐘", answer: "СЛОН",      options: ["СЛОН", "НОСОРОГ", "БЕГЕМОТ", "ЖИРАФ"] },
+  { emoji: "🦒", answer: "ЖИРАФ",     options: ["ЖИРАФ", "СЛОН", "ЗЕБРА", "ЛОШАДЬ"] },
+  { emoji: "🐬", answer: "ДЕЛЬФИН",   options: ["КИТ", "АКУЛА", "ДЕЛЬФИН", "МОРЖ"] },
+  { emoji: "🐋", answer: "КИТ",       options: ["КИТ", "ДЕЛЬФИН", "АКУЛА", "РЫБА"] },
+  { emoji: "🦋", answer: "БАБОЧКА",   options: ["ПЧЕЛА", "БАБОЧКА", "СТРЕКОЗА", "МУХ"] },
+  { emoji: "🐝", answer: "ПЧЕЛА",     options: ["МУХА", "ОСА", "ПЧЕЛА", "ШМЕЛЬ"] },
+  { emoji: "🐢", answer: "ЧЕРЕПАХА",  options: ["ЧЕРЕПАХА", "ЯЩЕРИЦА", "КРОКОДИЛ", "ЗМЕЯ"] },
+  { emoji: "🦀", answer: "КРАБ",      options: ["КРАБ", "ОМАР", "РАК", "МЕДУЗА"] },
+  { emoji: "🐧", answer: "ПИНГВИН",   options: ["ГУСЬ", "ПИНГВИН", "УТКА", "ЛЕБЕДЬ"] },
+  { emoji: "🦜", answer: "ПОПУГАЙ",   options: ["ПОПУГАЙ", "ВОРОНА", "СОВА", "ОРЁЛ"] },
+  { emoji: "🦅", answer: "ОРЁЛ",      options: ["ОРЁЛ", "ПОПУГАЙ", "СОВА", "ВОРОНА"] },
+  { emoji: "🦔", answer: "ЁЖ",        options: ["МЫШЬ", "ЁЖ", "ХОМЯК", "БОБЁР"] },
+  // Еда
+  { emoji: "🍎", answer: "ЯБЛОКО",    options: ["ГРУША", "БАНАН", "ЯБЛОКО", "АПЕЛЬСИН"] },
+  { emoji: "🍌", answer: "БАНАН",     options: ["МАНГО", "БАНАН", "ЛИМОН", "АНАНАС"] },
+  { emoji: "🍊", answer: "АПЕЛЬСИН", options: ["ЛИМОН", "МАНДАРИН", "АПЕЛЬСИН", "ГРЕЙПФРУТ"] },
+  { emoji: "🍇", answer: "ВИНОГРАД",  options: ["СЛИВА", "ВИШНЯ", "ВИНОГРАД", "ЧЕРНИКА"] },
+  { emoji: "🍓", answer: "КЛУБНИКА",  options: ["МАЛИНА", "КЛУБНИКА", "ЧЕРНИКА", "КРЫЖОВНИК"] },
+  { emoji: "🍉", answer: "АРБУЗ",     options: ["ДЫНЯ", "АРБУЗ", "ТЫКВА", "КАБАЧОК"] },
+  { emoji: "🍋", answer: "ЛИМОН",     options: ["АПЕЛЬСИН", "ЛИМОН", "ЛАЙМ", "МАНДАРИН"] },
+  { emoji: "🍒", answer: "ВИШНЯ",     options: ["ЧЕРЕШНЯ", "ВИШНЯ", "СЛИВА", "КЛУБНИКА"] },
+  { emoji: "🥝", answer: "КИВИ",      options: ["МАНГО", "АВОКАДО", "КИВИ", "ФИГА"] },
+  { emoji: "🍑", answer: "ПЕРСИК",    options: ["АБРИКОС", "ПЕРСИК", "СЛИВА", "МАНГО"] },
+  { emoji: "🥕", answer: "МОРКОВЬ",   options: ["СВЁКЛА", "МОРКОВЬ", "РЕДЬКА", "РЕПА"] },
+  { emoji: "🥦", answer: "БРОККОЛИ",  options: ["КАПУСТА", "ШПИНАТ", "БРОККОЛИ", "САЛАТ"] },
+  { emoji: "🌽", answer: "КУКУРУЗА",  options: ["КУКУРУЗА", "ПШЕНИЦА", "РИС", "ОВЁС"] },
+  { emoji: "🍄", answer: "ГРИБ",      options: ["ГРИБ", "ЦВЕТОК", "ЯГОДА", "МОХ"] },
+  { emoji: "🍕", answer: "ПИЦЦА",     options: ["ТОРТ", "ПИРОГ", "ПИЦЦА", "ХЛЕБ"] },
+  { emoji: "🍦", answer: "МОРОЖЕНОЕ", options: ["МОРОЖЕНОЕ", "ТОРТ", "ПИРОЖНОЕ", "КРЕМ"] },
+  { emoji: "🍫", answer: "ШОКОЛАД",   options: ["КОНФЕТА", "ШОКОЛАД", "КАРАМЕЛЬ", "МАРМЕЛАД"] },
+  { emoji: "🧁", answer: "КЕКС",      options: ["ТОРТ", "ПИРОЖНОЕ", "КЕКС", "БУЛОЧКА"] },
+  // Транспорт
+  { emoji: "🚗", answer: "МАШИНА",    options: ["АВТОБУС", "МАШИНА", "ГРУЗОВИК", "МОТОЦИКЛ"] },
+  { emoji: "✈️", answer: "САМОЛЁТ",   options: ["ВЕРТОЛЁТ", "САМОЛЁТ", "РАКЕТА", "ПЛАНЕР"] },
+  { emoji: "🚂", answer: "ПОЕЗД",     options: ["ТРАМВАЙ", "ПОЕЗД", "МЕТРО", "АВТОБУС"] },
+  { emoji: "🚢", answer: "КОРАБЛЬ",   options: ["ЛОДКА", "ЯХТА", "КОРАБЛЬ", "ПАРОМ"] },
+  { emoji: "🚁", answer: "ВЕРТОЛЁТ",  options: ["САМОЛЁТ", "ВЕРТОЛЁТ", "ДРОН", "ПЛАНЕР"] },
+  { emoji: "🚲", answer: "ВЕЛОСИПЕД", options: ["САМОКАТ", "ВЕЛОСИПЕД", "МОТОЦИКЛ", "РОЛИКB"] },
+  { emoji: "🛸", answer: "РАКЕТА",    options: ["САМОЛЁТ", "РАКЕТА", "ВЕРТОЛЁТ", "СПУТНИК"] },
+  { emoji: "🚌", answer: "АВТОБУС",   options: ["АВТОБУС", "ТРОЛЛЕЙБУС", "ТРАМВАЙ", "МАШИНА"] },
+  // Природа и окружение
+  { emoji: "🌳", answer: "ДЕРЕВО",    options: ["КУСТ", "ДЕРЕВО", "ЦВЕТОК", "ТРАВА"] },
+  { emoji: "🌻", answer: "ПОДСОЛНУХ", options: ["РОЗА", "РОМАШКА", "ПОДСОЛНУХ", "ТЮЛЬПАН"] },
+  { emoji: "🌹", answer: "РОЗА",      options: ["ТЮЛЬПАН", "РОЗА", "РОМАШКА", "ЛИЛИЯ"] },
+  { emoji: "🌈", answer: "РАДУГА",    options: ["ГРОЗА", "РАДУГА", "ЗАКАТ", "РАССВЕТ"] },
+  { emoji: "☀️", answer: "СОЛНЦЕ",    options: ["ЛУНА", "ЗВЕЗДА", "СОЛНЦЕ", "ОГОНЬ"] },
+  { emoji: "🌙", answer: "ЛУНА",      options: ["СОЛНЦЕ", "ЗВЕЗДА", "ЛУНА", "ПЛАНЕТА"] },
+  { emoji: "❄️", answer: "СНЕЖИНКА",  options: ["ЛЁД", "СНЕГ", "СНЕЖИНКА", "ИНЕЙ"] },
+  { emoji: "🌊", answer: "ВОЛНА",     options: ["МОРЕ", "ВОЛНА", "РЕКА", "ОЗЕРО"] },
+  // Предметы
+  { emoji: "🏠", answer: "ДОМ",       options: ["ШКОЛА", "ДОМ", "МАГАЗИН", "БОЛЬНИЦА"] },
+  { emoji: "📚", answer: "КНИГА",     options: ["ЖУРНАЛ", "КНИГА", "ТЕТРАДЬ", "ГАЗЕТА"] },
+  { emoji: "✏️", answer: "КАРАНДАШ",  options: ["РУЧКА", "КИСТЬ", "КАРАНДАШ", "ФЛОМАСТЕР"] },
+  { emoji: "🖊️", answer: "РУЧКА",     options: ["РУЧКА", "КАРАНДАШ", "МАРКЕР", "МЕЛ"] },
+  { emoji: "⌚", answer: "ЧАСЫ",      options: ["БУДИЛЬНИК", "ЧАСЫ", "ТАЙМЕР", "СЕКУНДОМЕР"] },
+  { emoji: "📱", answer: "ТЕЛЕФОН",   options: ["ТЕЛЕФОН", "ПЛАНШЕТ", "КОМПЬЮТЕР", "ПУЛЬТ"] },
+  { emoji: "💡", answer: "ЛАМПА",     options: ["СВЕЧА", "ФОНАРЬ", "ЛАМПА", "ПРОЖЕКТОР"] },
+  { emoji: "🎒", answer: "РЮКЗАК",    options: ["СУМКА", "РЮКЗАК", "ЧЕМОДАН", "ПОРТФЕЛЬ"] },
+  { emoji: "🧸", answer: "МИШКА",     options: ["КУКЛА", "МИШКА", "ЗАЙКА", "МАШИНКА"] },
+  { emoji: "⚽", answer: "МЯЧ",       options: ["МЯЧ", "ШАР", "ПУЗЫРЬ", "АПЕЛЬСИН"] },
+];
+
+export function getRandomPictureQuestions(count: number = 6) {
+  const shuffled = [...ALL_PICTURE_QUESTIONS].sort(() => Math.random() - 0.5);
+  return shuffled.slice(0, count).map(q => ({
+    ...q,
+    options: [...q.options].sort(() => Math.random() - 0.5),
+  }));
+}
+
+// ======= COLORS & SHAPES (100+ раундов) =======
+export const ALL_COLOR_ROUNDS = [
+  { question: "Найди КРАСНЫЙ",       emoji: "🔴", target: "red",      options: [{ emoji: "🔵", color: "blue", label: "Синий" }, { emoji: "🟡", color: "yellow", label: "Жёлтый" }, { emoji: "🔴", color: "red", label: "Красный" }, { emoji: "🟢", color: "green", label: "Зелёный" }] },
+  { question: "Найди СИНИЙ",         emoji: "🔵", target: "blue",     options: [{ emoji: "🔴", color: "red", label: "Красный" }, { emoji: "🔵", color: "blue", label: "Синий" }, { emoji: "🟢", color: "green", label: "Зелёный" }, { emoji: "⚪", color: "white", label: "Белый" }] },
+  { question: "Найди ЖЁЛТЫЙ",        emoji: "🟡", target: "yellow",   options: [{ emoji: "🟡", color: "yellow", label: "Жёлтый" }, { emoji: "🟣", color: "purple", label: "Фиолетовый" }, { emoji: "🟤", color: "brown", label: "Коричневый" }, { emoji: "⚫", color: "black", label: "Чёрный" }] },
+  { question: "Найди ЗЕЛЁНЫЙ",       emoji: "🟢", target: "green",    options: [{ emoji: "🔴", color: "red", label: "Красный" }, { emoji: "🟢", color: "green", label: "Зелёный" }, { emoji: "🟡", color: "yellow", label: "Жёлтый" }, { emoji: "🔵", color: "blue", label: "Синий" }] },
+  { question: "Найди ФИОЛЕТОВЫЙ",    emoji: "🟣", target: "purple",   options: [{ emoji: "🟣", color: "purple", label: "Фиолетовый" }, { emoji: "🔵", color: "blue", label: "Синий" }, { emoji: "🔴", color: "red", label: "Красный" }, { emoji: "🟤", color: "brown", label: "Коричневый" }] },
+  { question: "Найди ОРАНЖЕВЫЙ",     emoji: "🟠", target: "orange",   options: [{ emoji: "🟡", color: "yellow", label: "Жёлтый" }, { emoji: "🟠", color: "orange", label: "Оранжевый" }, { emoji: "🔴", color: "red", label: "Красный" }, { emoji: "🟤", color: "brown", label: "Коричневый" }] },
+  { question: "Найди КРУГ",          emoji: "⭕", target: "circle",   options: [{ emoji: "🔺", color: "triangle", label: "Треугольник" }, { emoji: "⬛", color: "square", label: "Квадрат" }, { emoji: "⭕", color: "circle", label: "Круг" }, { emoji: "💠", color: "diamond", label: "Ромб" }] },
+  { question: "Найди КВАДРАТ",       emoji: "⬛", target: "square",   options: [{ emoji: "⭕", color: "circle", label: "Круг" }, { emoji: "⬛", color: "square", label: "Квадрат" }, { emoji: "🔺", color: "triangle", label: "Треугольник" }, { emoji: "💠", color: "diamond", label: "Ромб" }] },
+  { question: "Найди ТРЕУГОЛЬНИК",   emoji: "🔺", target: "triangle", options: [{ emoji: "⭕", color: "circle", label: "Круг" }, { emoji: "⬛", color: "square", label: "Квадрат" }, { emoji: "🔺", color: "triangle", label: "Треугольник" }, { emoji: "💠", color: "diamond", label: "Ромб" }] },
+  { question: "Найди БОЛЬШОЕ",       emoji: "🐘", target: "big",      options: [{ emoji: "🐭", color: "small", label: "Маленькое" }, { emoji: "🐘", color: "big", label: "Большое" }, { emoji: "🐝", color: "tiny", label: "Крошечное" }, { emoji: "🐇", color: "medium", label: "Среднее" }] },
+  { question: "Найди МАЛЕНЬКОЕ",     emoji: "🐭", target: "small",    options: [{ emoji: "🐘", color: "big", label: "Большое" }, { emoji: "🐭", color: "small", label: "Маленькое" }, { emoji: "🦁", color: "large", label: "Крупное" }, { emoji: "🐊", color: "medium", label: "Среднее" }] },
+  { question: "Найди СЕРДЦЕ",        emoji: "❤️", target: "heart",    options: [{ emoji: "⭕", color: "circle", label: "Круг" }, { emoji: "⭐", color: "star", label: "Звезда" }, { emoji: "❤️", color: "heart", label: "Сердце" }, { emoji: "🔺", color: "triangle", label: "Треугольник" }] },
+  { question: "Найди ЗВЕЗДУ",        emoji: "⭐", target: "star",     options: [{ emoji: "❤️", color: "heart", label: "Сердце" }, { emoji: "⭐", color: "star", label: "Звезда" }, { emoji: "⭕", color: "circle", label: "Круг" }, { emoji: "💠", color: "diamond", label: "Ромб" }] },
+  { question: "Найди ТЁПЛЫЙ цвет",   emoji: "🌞", target: "warm",     options: [{ emoji: "🔵", color: "cold", label: "Холодный" }, { emoji: "🟢", color: "neutral", label: "Нейтральный" }, { emoji: "🔴", color: "warm", label: "Тёплый" }, { emoji: "⚫", color: "dark", label: "Тёмный" }] },
+  { question: "Найди ХОЛОДНЫЙ цвет", emoji: "❄️", target: "cold",     options: [{ emoji: "🔴", color: "warm", label: "Тёплый" }, { emoji: "🔵", color: "cold", label: "Холодный" }, { emoji: "🟡", color: "bright", label: "Яркий" }, { emoji: "🟤", color: "dark", label: "Тёмный" }] },
+];
+
+export function getRandomColorRounds(count: number = 5) {
+  const shuffled = [...ALL_COLOR_ROUNDS].sort(() => Math.random() - 0.5);
+  return shuffled.slice(0, count).map(r => ({
+    ...r,
+    options: [...r.options].sort(() => Math.random() - 0.5),
+  }));
+}
+
+// ======= PUZZLE WORD (100+ слов) =======
+export const ALL_PUZZLES = [
+  { word: "МАМА",     emoji: "👩",  clue: "Самый близкий человек" },
+  { word: "ПАПА",     emoji: "👨",  clue: "Глава семьи" },
+  { word: "ЛУНА",     emoji: "🌙",  clue: "Светит ночью" },
+  { word: "РЕКА",     emoji: "🏞️",  clue: "Течёт между берегов" },
+  { word: "ГРИБ",     emoji: "🍄",  clue: "Растёт в лесу" },
+  { word: "ЗИМА",     emoji: "❄️",  clue: "Холодное время года" },
+  { word: "ЛЕТО",     emoji: "☀️",  clue: "Жаркое время года" },
+  { word: "ОСЕНЬ",    emoji: "🍂",  clue: "Листья падают" },
+  { word: "ВЕСНА",    emoji: "🌸",  clue: "Цветы распускаются" },
+  { word: "КОШКА",    emoji: "🐱",  clue: "Мурлычет дома" },
+  { word: "СОБАКА",   emoji: "🐶",  clue: "Лучший друг человека" },
+  { word: "ПТИЦА",    emoji: "🐦",  clue: "Умеет летать" },
+  { word: "РЫБА",     emoji: "🐟",  clue: "Живёт в воде" },
+  { word: "МЕДВЕДЬ",  emoji: "🐻",  clue: "Любит мёд и спит зимой" },
+  { word: "ЗАЯЦ",     emoji: "🐇",  clue: "Прыгает и боится лисы" },
+  { word: "ВОЛК",     emoji: "🐺",  clue: "Воет на луну" },
+  { word: "ЛИСА",     emoji: "🦊",  clue: "Рыжая хитрюга" },
+  { word: "СЛОН",     emoji: "🐘",  clue: "Самое большое животное суши" },
+  { word: "ЖИРАФ",    emoji: "🦒",  clue: "Самая длинная шея" },
+  { word: "ТИГР",     emoji: "🐯",  clue: "Полосатый хищник" },
+  { word: "ЯБЛОКО",   emoji: "🍎",  clue: "Красный или зелёный фрукт" },
+  { word: "БАНАН",    emoji: "🍌",  clue: "Жёлтый гнутый фрукт" },
+  { word: "АПЕЛЬСИН", emoji: "🍊",  clue: "Сочный оранжевый фрукт" },
+  { word: "АРБУЗ",    emoji: "🍉",  clue: "Большая зелёная ягода" },
+  { word: "КЛУБНИКА", emoji: "🍓",  clue: "Красная сладкая ягода" },
+  { word: "МАШИНА",   emoji: "🚗",  clue: "Едет по дороге" },
+  { word: "ПОЕЗД",    emoji: "🚂",  clue: "Едет по рельсам" },
+  { word: "САМОЛЁТ",  emoji: "✈️",  clue: "Летит высоко в небе" },
+  { word: "КОРАБЛЬ",  emoji: "🚢",  clue: "Плывёт по морю" },
+  { word: "ВЕЛОСИПЕД",emoji: "🚲",  clue: "Едет на двух колёсах, крутим педали" },
+  { word: "ШКОЛА",    emoji: "🏫",  clue: "Дети учатся там" },
+  { word: "КНИГА",    emoji: "📚",  clue: "В ней много страниц и историй" },
+  { word: "КАРАНДАШ", emoji: "✏️",  clue: "Им рисуют и пишут" },
+  { word: "ЦВЕТОК",   emoji: "🌸",  clue: "Растёт в саду, пахнет хорошо" },
+  { word: "СОЛНЦЕ",   emoji: "☀️",  clue: "Светит днём и греет" },
+  { word: "ЗВЕЗДА",   emoji: "⭐",  clue: "Светит ночью на небе" },
+  { word: "ОБЛАКО",   emoji: "☁️",  clue: "Плывёт по небу" },
+  { word: "РАДУГА",   emoji: "🌈",  clue: "Семь цветов после дождя" },
+  { word: "ДЕРЕВО",   emoji: "🌳",  clue: "Высокое, с листьями и корнями" },
+  { word: "ТРАВА",    emoji: "🌿",  clue: "Зелёная, растёт на земле" },
+];
+
+export function getRandomPuzzles(count: number = 5) {
+  return [...ALL_PUZZLES].sort(() => Math.random() - 0.5).slice(0, count);
+}
+
+// ======= REPEAT SOUND (50+ звуков) =======
+export const ALL_SOUNDS = [
+  { letter: "А", word: "АРБУЗ",    emoji: "🍉", phrase: "А как в слове АРБУЗ",   example: ["А-рбуз", "А-пельсин", "А-ист"] },
+  { letter: "Б", word: "БАНАН",    emoji: "🍌", phrase: "Б как в слове БАНАН",   example: ["Б-анан", "Б-аран", "Б-абочка"] },
+  { letter: "В", word: "ВОЛК",     emoji: "🐺", phrase: "В как в слове ВОЛК",    example: ["В-олк", "В-ерблюд", "В-оробей"] },
+  { letter: "Г", word: "ГРИБ",     emoji: "🍄", phrase: "Г как в слове ГРИБ",    example: ["Г-риб", "Г-усь", "Г-орилла"] },
+  { letter: "Д", word: "ДОМ",      emoji: "🏠", phrase: "Д как в слове ДОМ",     example: ["Д-ом", "Д-ельфин", "Д-ерево"] },
+  { letter: "Е", word: "ЕЖОНОК",   emoji: "🦔", phrase: "Е как в слове ЁЖИК",    example: ["Ё-жик", "Е-нот", "Е-ль"] },
+  { letter: "Ж", word: "ЖУК",      emoji: "🪲", phrase: "Ж как в слове ЖУК",     example: ["Ж-ук", "Ж-ираф", "Ж-аба"] },
+  { letter: "З", word: "ЗАЯЦ",     emoji: "🐇", phrase: "З как в слове ЗАЯЦ",    example: ["З-аяц", "З-ебра", "З-убр"] },
+  { letter: "И", word: "ИГЛА",     emoji: "🪡", phrase: "И как в слове ИГЛА",    example: ["И-гла", "И-волга", "И-скра"] },
+  { letter: "К", word: "КОТ",      emoji: "🐱", phrase: "К как в слове КОТ",     example: ["К-от", "К-рокодил", "К-ит"] },
+  { letter: "Л", word: "ЛИСА",     emoji: "🦊", phrase: "Л как в слове ЛИСА",    example: ["Л-иса", "Л-ось", "Л-ебедь"] },
+  { letter: "М", word: "МАМА",     emoji: "👩", phrase: "М как в слове МАМА",    example: ["М-ама", "М-яч", "М-едведь"] },
+  { letter: "Н", word: "НОС",      emoji: "👃", phrase: "Н как в слове НОС",     example: ["Н-ос", "Н-орка", "Н-очь"] },
+  { letter: "О", word: "ОЛЕНЬ",    emoji: "🦌", phrase: "О как в слове ОЛЕНЬ",   example: ["О-лень", "О-сёл", "О-рёл"] },
+  { letter: "П", word: "ПАПА",     emoji: "👨", phrase: "П как в слове ПАПА",    example: ["П-апа", "П-ингвин", "П-чела"] },
+  { letter: "Р", word: "РЫБА",     emoji: "🐟", phrase: "Р как в слове РЫБА",    example: ["Р-ыба", "Р-акета", "Р-оза"] },
+  { letter: "С", word: "СЛОН",     emoji: "🐘", phrase: "С как в слове СЛОН",    example: ["С-лон", "С-обака", "С-олнце"] },
+  { letter: "Т", word: "ТИГР",     emoji: "🐯", phrase: "Т как в слове ТИГР",    example: ["Т-игр", "Т-юлень", "Т-ополь"] },
+  { letter: "У", word: "УТКА",     emoji: "🦆", phrase: "У как в слове УТКА",    example: ["У-тка", "У-ж", "У-литка"] },
+  { letter: "Ф", word: "ФЛАМИНГО", emoji: "🦩", phrase: "Ф как в слове ФЛАМИНГО",example: ["Ф-ламинго", "Ф-окус", "Ф-онарь"] },
+  { letter: "Х", word: "ХОМЯК",   emoji: "🐹", phrase: "Х как в слове ХОМЯК",   example: ["Х-омяк", "Х-орёк", "Х-леб"] },
+  { letter: "Ц", word: "ЦАПЛЯ",   emoji: "🦢", phrase: "Ц как в слове ЦАПЛЯ",   example: ["Ц-апля", "Ц-ирк", "Ц-ыплёнок"] },
+  { letter: "Ч", word: "ЧАЙКА",   emoji: "🐦", phrase: "Ч как в слове ЧАЙКА",   example: ["Ч-айка", "Ч-ерепаха", "Ч-еловек"] },
+  { letter: "Ш", word: "ШАРИК",   emoji: "🎈", phrase: "Ш как в слове ШАРИК",   example: ["Ш-арик", "Ш-ляпа", "Ш-кола"] },
+  { letter: "Щ", word: "ЩЕНОК",   emoji: "🐶", phrase: "Щ как в слове ЩЕНОК",   example: ["Щ-енок", "Щ-ит", "Щ-ука"] },
+  { letter: "Э", word: "ЭКРАН",   emoji: "📺", phrase: "Э как в слове ЭКРАН",   example: ["Э-кран", "Э-скимо", "Э-лектрон"] },
+  { letter: "Ю", word: "ЮЛА",     emoji: "🌀", phrase: "Ю как в слове ЮЛА",     example: ["Ю-ла", "Ю-нга", "Ю-мор"] },
+  { letter: "Я", word: "ЯКОРЬ",   emoji: "⚓", phrase: "Я как в слове ЯКОРЬ",   example: ["Я-корь", "Я-гуар", "Я-блоко"] },
+];
+
+export function getRandomSounds(count: number = 5) {
+  return [...ALL_SOUNDS].sort(() => Math.random() - 0.5).slice(0, count);
+}
