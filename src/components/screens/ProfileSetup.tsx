@@ -34,7 +34,7 @@ export function ProfileSetup({ current, onSave, onClose, isFirstTime = false }: 
         <div className="text-center">
           <div className="text-5xl mb-3 anim-bounce-slow">🦉</div>
           <div className="text-3xl font-black" style={{ background: "linear-gradient(135deg, #7C3AED, #EC4899)", WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent" }}>
-            ЗнайКа ✨
+            TW ✨
           </div>
           <div className="text-gray-400 font-semibold mt-1 text-sm">
             {isFirstTime ? "Добро пожаловать! Как тебя зовут?" : "Измени свой профиль"}

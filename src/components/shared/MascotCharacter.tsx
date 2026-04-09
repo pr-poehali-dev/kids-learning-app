@@ -37,7 +37,7 @@ export function MascotCharacter({ mood = 0 }: { mood?: number }) {
         </div>
       </div>
       <div className="absolute -bottom-2 left-1/2 -translate-x-1/2 bg-white rounded-full px-2 py-0.5 text-xs font-bold text-purple-700 shadow-sm whitespace-nowrap border border-purple-100">
-        ЗнайКа
+        TW
       </div>
     </div>
   );

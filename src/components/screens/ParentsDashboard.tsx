@@ -33,7 +33,7 @@ export function ParentsDashboard({ profile, onExit }: Props) {
           <div className="flex items-center justify-between">
             <div>
               <div className="text-indigo-300 text-xs font-bold uppercase tracking-widest mb-1">Панель родителей</div>
-              <div className="text-white font-black text-2xl">ЗнайКа 📊</div>
+              <div className="text-white font-black text-2xl">TW 📊</div>
             </div>
             <button
               onClick={onExit}

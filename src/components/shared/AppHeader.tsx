@@ -29,21 +29,31 @@ export function AppHeader({ profile, xpState, levelInfo, onProfileClick }: Props
       <div className="fixed top-56 left-8 text-2xl opacity-10 anim-float pointer-events-none" style={{ animationDelay: "2s" }}>✨</div>
 
       <header className="px-5 pt-6 pb-3">
+        {/* Top row */}
         <div className="flex items-center justify-between mb-3">
           <div>
             <div
-              className="text-2xl font-black"
+              className="text-2xl font-black tracking-tight"
               style={{ background: "linear-gradient(135deg, #7C3AED, #EC4899)", WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent" }}
             >
-              ЗнайКа ✨
+              TW ✨
             </div>
             <div className="text-xs text-gray-400 font-semibold">Учимся играя!</div>
           </div>
+
+          {/* Stats chips */}
           <div className="flex items-center gap-2">
+            {/* Day streak */}
+            <div className="bg-orange-100 rounded-2xl px-3 py-1.5 flex items-center gap-1">
+              <span className="text-base">🔥</span>
+              <span className="font-black text-orange-600 text-sm">{xpState.dayStreak}</span>
+            </div>
+            {/* XP */}
             <div className="bg-yellow-100 rounded-2xl px-3 py-1.5 flex items-center gap-1">
               <span className="text-base">⭐</span>
-              <span className="font-black text-yellow-700 text-sm">{xpState.xp} XP</span>
+              <span className="font-black text-yellow-700 text-sm">{xpState.xp}</span>
             </div>
+            {/* Avatar */}
             <button
               onClick={onProfileClick}
               className="w-10 h-10 rounded-2xl flex items-center justify-center text-xl transition-all active:scale-90"
@@ -56,22 +66,32 @@ export function AppHeader({ profile, xpState, levelInfo, onProfileClick }: Props
         </div>
 
         {/* Level bar */}
-        <div className="bg-white/70 rounded-2xl px-3 py-2 flex items-center gap-3 backdrop-blur-sm border border-white/80">
-          <div className="text-base">{levelInfo.name.split(" ")[0]}</div>
-          <div className="flex-1">
+        <div className="bg-white/70 rounded-2xl px-3 py-2.5 flex items-center gap-3 backdrop-blur-sm border border-white/80">
+          {/* Level badge */}
+          <div
+            className="flex-shrink-0 w-9 h-9 rounded-xl flex items-center justify-center text-sm font-black text-white"
+            style={{ background: levelInfo.color }}
+          >
+            {xpState.level}
+          </div>
+          <div className="flex-1 min-w-0">
             <div className="flex items-center justify-between mb-1">
-              <span className="text-xs font-black" style={{ color: levelInfo.color }}>{levelInfo.name}</span>
-              <span className="text-xs text-gray-400 font-semibold">{pct}%</span>
+              <span className="text-xs font-black truncate" style={{ color: levelInfo.color }}>
+                {levelInfo.name}
+              </span>
+              <span className="text-xs text-gray-400 font-semibold ml-2 flex-shrink-0">
+                {nextLevel ? `${nextLevel.min - xpState.xp} XP` : "MAX"}
+              </span>
             </div>
-            <div className="h-2 bg-gray-100 rounded-full overflow-hidden">
+            <div className="h-2.5 bg-gray-100 rounded-full overflow-hidden">
               <div
                 className="h-full rounded-full transition-all duration-700"
-                style={{ width: `${pct}%`, background: levelInfo.color }}
+                style={{ width: `${pct}%`, background: `linear-gradient(90deg, ${levelInfo.color}, ${levelInfo.color}bb)` }}
               />
             </div>
           </div>
           {nextLevel && (
-            <div className="text-base opacity-40">{nextLevel.name.split(" ")[0]}</div>
+            <div className="flex-shrink-0 text-base opacity-30">{nextLevel.name.split(" ")[0]}</div>
           )}
         </div>
       </header>
